@@ -7,11 +7,16 @@ let tarefas = [];
 function renderizar() {
   lista.innerHTML = "";
 
-  tarefas.forEach((tarefa) => {
+  tarefas.forEach((tarefa, indice) => {
     const li = document.createElement("li");
+    if (tarefa.feita) li.classList.add("concluida");
 
     const span = document.createElement("span");
     span.textContent = tarefa.texto;
+    span.addEventListener("click", () => {
+      tarefa.feita = !tarefa.feita;
+      renderizar();
+    });
 
     li.appendChild(span);
     lista.appendChild(li);
