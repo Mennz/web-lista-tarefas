@@ -18,7 +18,15 @@ function renderizar() {
       renderizar();
     });
 
+    const botaoRemover = document.createElement("button");
+    botaoRemover.textContent = "remover";
+    botaoRemover.addEventListener("click", () => {
+      tarefas.splice(indice, 1);
+      renderizar();
+    });
+
     li.appendChild(span);
+    li.appendChild(botaoRemover);
     lista.appendChild(li);
   });
 }
