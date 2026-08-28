@@ -74,6 +74,7 @@ h1 {
 
 #lista-tarefas li span {
   flex: 1;
+  cursor: pointer;
 }
 
 #lista-tarefas li.concluida span {
