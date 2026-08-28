@@ -2,7 +2,12 @@ const form = document.getElementById("form-tarefa");
 const input = document.getElementById("input-tarefa");
 const lista = document.getElementById("lista-tarefas");
 
-let tarefas = [];
+// getItem devolve string, tem que dar parse
+let tarefas = JSON.parse(localStorage.getItem("tarefas") || "[]");
+
+function salvar() {
+  localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
 
 function renderizar() {
   lista.innerHTML = "";
@@ -15,6 +20,7 @@ function renderizar() {
     span.textContent = tarefa.texto;
     span.addEventListener("click", () => {
       tarefa.feita = !tarefa.feita;
+      salvar();
       renderizar();
     });
 
@@ -22,6 +28,7 @@ function renderizar() {
     botaoRemover.textContent = "remover";
     botaoRemover.addEventListener("click", () => {
       tarefas.splice(indice, 1);
+      salvar();
       renderizar();
     });
 
@@ -39,5 +46,8 @@ form.addEventListener("submit", (evento) => {
 
   tarefas.push({ texto, feita: false });
   input.value = "";
+  salvar();
   renderizar();
 });
+
+renderizar();
