@@ -1,18 +1,28 @@
 const form = document.getElementById("form-tarefa");
 const input = document.getElementById("input-tarefa");
 const lista = document.getElementById("lista-tarefas");
+const botoesFiltro = document.querySelectorAll("#filtros button");
 
 // getItem devolve string, tem que dar parse
 let tarefas = JSON.parse(localStorage.getItem("tarefas") || "[]");
+let filtroAtual = "todas";
 
 function salvar() {
   localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
+
+function filtrar(tarefa) {
+  if (filtroAtual === "pendentes") return !tarefa.feita;
+  if (filtroAtual === "concluidas") return tarefa.feita;
+  return true;
 }
 
 function renderizar() {
   lista.innerHTML = "";
 
   tarefas.forEach((tarefa, indice) => {
+    if (!filtrar(tarefa)) return;
+
     const li = document.createElement("li");
     if (tarefa.feita) li.classList.add("concluida");
 
@@ -70,6 +80,17 @@ form.addEventListener("submit", (evento) => {
   input.value = "";
   salvar();
   renderizar();
+});
+
+botoesFiltro.forEach((botao) => {
+  botao.addEventListener("click", () => {
+    filtroAtual = botao.dataset.filtro;
+
+    botoesFiltro.forEach((b) => b.classList.remove("filtro-ativo"));
+    botao.classList.add("filtro-ativo");
+
+    renderizar();
+  });
 });
 
 renderizar();

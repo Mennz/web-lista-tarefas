@@ -56,6 +56,28 @@ h1 {
   background-color: #1c66c9;
 }
 
+#filtros {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#filtros button {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#filtros button.filtro-ativo {
+  background-color: #2f80ed;
+  color: #fff;
+  border-color: #2f80ed;
+}
+
 #lista-tarefas {
   list-style: none;
 }
