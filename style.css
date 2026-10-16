@@ -89,3 +89,11 @@ h1 {
   font-size: 14px;
   color: #e74c3c;
 }
+
+.input-edicao {
+  flex: 1;
+  padding: 4px 6px;
+  border: 1px solid #2f80ed;
+  border-radius: 4px;
+  font-size: 14px;
+}

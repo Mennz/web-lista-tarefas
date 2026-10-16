@@ -24,6 +24,28 @@ function renderizar() {
       renderizar();
     });
 
+    span.addEventListener("dblclick", () => {
+      const inputEdicao = document.createElement("input");
+      inputEdicao.type = "text";
+      inputEdicao.value = tarefa.texto;
+      inputEdicao.classList.add("input-edicao");
+
+      function confirmarEdicao() {
+        const novoTexto = inputEdicao.value.trim();
+        if (novoTexto !== "") tarefa.texto = novoTexto;
+        salvar();
+        renderizar();
+      }
+
+      inputEdicao.addEventListener("blur", confirmarEdicao);
+      inputEdicao.addEventListener("keydown", (evento) => {
+        if (evento.key === "Enter") inputEdicao.blur();
+      });
+
+      li.replaceChild(inputEdicao, span);
+      inputEdicao.focus();
+    });
+
     const botaoRemover = document.createElement("button");
     botaoRemover.textContent = "remover";
     botaoRemover.addEventListener("click", () => {
