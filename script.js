@@ -7,6 +7,7 @@ const contador = document.getElementById("contador");
 // getItem devolve string, tem que dar parse
 let tarefas = JSON.parse(localStorage.getItem("tarefas") || "[]");
 let filtroAtual = "todas";
+let indiceArrastado = null;
 
 function salvar() {
   localStorage.setItem("tarefas", JSON.stringify(tarefas));
@@ -26,6 +27,27 @@ function renderizar() {
 
     const li = document.createElement("li");
     if (tarefa.feita) li.classList.add("concluida");
+
+    li.draggable = true;
+    li.addEventListener("dragstart", () => {
+      li.classList.add("arrastando");
+      indiceArrastado = indice;
+    });
+    li.addEventListener("dragend", () => {
+      li.classList.remove("arrastando");
+    });
+    li.addEventListener("dragover", (evento) => {
+      evento.preventDefault();
+    });
+    li.addEventListener("drop", () => {
+      if (indiceArrastado === null || indiceArrastado === indice) return;
+
+      const [arrastada] = tarefas.splice(indiceArrastado, 1);
+      tarefas.splice(indice, 0, arrastada);
+      indiceArrastado = null;
+      salvar();
+      renderizar();
+    });
 
     const span = document.createElement("span");
     span.textContent = tarefa.texto;

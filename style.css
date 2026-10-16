@@ -94,6 +94,10 @@ h1 {
   border-bottom: none;
 }
 
+#lista-tarefas li.arrastando {
+  opacity: 0.4;
+}
+
 #lista-tarefas li span {
   flex: 1;
   cursor: pointer;
