@@ -2,6 +2,7 @@ const form = document.getElementById("form-tarefa");
 const input = document.getElementById("input-tarefa");
 const lista = document.getElementById("lista-tarefas");
 const botoesFiltro = document.querySelectorAll("#filtros button");
+const contador = document.getElementById("contador");
 
 // getItem devolve string, tem que dar parse
 let tarefas = JSON.parse(localStorage.getItem("tarefas") || "[]");
@@ -68,6 +69,9 @@ function renderizar() {
     li.appendChild(botaoRemover);
     lista.appendChild(li);
   });
+
+  const pendentes = tarefas.filter((tarefa) => !tarefa.feita).length;
+  contador.textContent = pendentes === 1 ? "1 tarefa pendente" : `${pendentes} tarefas pendentes`;
 }
 
 form.addEventListener("submit", (evento) => {

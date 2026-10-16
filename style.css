@@ -112,6 +112,13 @@ h1 {
   color: #e74c3c;
 }
 
+#contador {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+}
+
 .input-edicao {
   flex: 1;
   padding: 4px 6px;
